@@ -33,6 +33,7 @@ public class PlayMusicActivity extends Activity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         setContentView(R.layout.play_music_activity);
 
         getExtras();
@@ -43,6 +44,12 @@ public class PlayMusicActivity extends Activity implements View.OnClickListener 
         if (!isMusicNull()) {
             layoutButton();
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 
     private void getExtras() {
@@ -117,7 +124,6 @@ public class PlayMusicActivity extends Activity implements View.OnClickListener 
     private void layoutMusicLyrics() {
         String[] musicLyricsArray = getResources().getStringArray(lyricsId);
         String musicLyrics = musicLyricsArray[musicPosition];
-        System.out.println("musicLyrics: " + musicLyrics);
 
         if (isEmpty(musicLyrics)) {
             return;
