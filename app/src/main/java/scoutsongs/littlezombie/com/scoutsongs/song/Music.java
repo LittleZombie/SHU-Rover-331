@@ -1,4 +1,4 @@
-package scoutsongs.littlezombie.com.scoutsongs;
+package scoutsongs.littlezombie.com.scoutsongs.song;
 
 import android.content.Context;
 import android.media.MediaPlayer;

@@ -3,10 +3,9 @@ package scoutsongs.littlezombie.com.scoutsongs.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.util.Log;
 
-import scoutsongs.littlezombie.com.scoutsongs.RecreationSongFragment;
-import scoutsongs.littlezombie.com.scoutsongs.ScoutSongFragment;
+import scoutsongs.littlezombie.com.scoutsongs.song.RecreationSongFragment;
+import scoutsongs.littlezombie.com.scoutsongs.song.ScoutSongFragment;
 
 /**
  * Created by Chia-en Li on 2015/12/15.

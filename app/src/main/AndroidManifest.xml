@@ -20,8 +20,11 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".song.SongActivity"
+            android:screenOrientation="portrait"/>
+
         <activity
-            android:name=".PlayMusicActivity"
+            android:name=".song.PlayMusicActivity"
             android:screenOrientation="portrait" />
 
     </application>

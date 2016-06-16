@@ -1,4 +1,4 @@
-package scoutsongs.littlezombie.com.scoutsongs;
+package scoutsongs.littlezombie.com.scoutsongs.song;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,12 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import scoutsongs.littlezombie.com.scoutsongs.R;
 import scoutsongs.littlezombie.com.scoutsongs.adapter.MusicAdapter;
 
 /**

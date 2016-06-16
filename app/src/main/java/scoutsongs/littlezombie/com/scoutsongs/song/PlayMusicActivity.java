@@ -1,4 +1,4 @@
-package scoutsongs.littlezombie.com.scoutsongs;
+package scoutsongs.littlezombie.com.scoutsongs.song;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import scoutsongs.littlezombie.com.scoutsongs.R;
 
 /**
  * Created by Chia-En, Li on 2015/3/18.
