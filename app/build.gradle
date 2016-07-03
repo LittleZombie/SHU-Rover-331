@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
 
     defaultConfig {
-        applicationId "scoutsongs.littlezombie.com.scoutsongs"
-        minSdkVersion 9
-        targetSdkVersion 23
-        versionCode 3
-        versionName "1.0.2"
+        applicationId "com.littlezombie.shurover"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 4
+        versionName "2.0.0"
     }
     buildTypes {
         release {
@@ -20,7 +20,15 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.android.support:design:23.3.0'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:24.0.0'
+    compile 'com.android.support:design:24.0.0'
+
+    compile 'com.google.firebase:firebase-messaging:9.2.0'
+    compile 'com.google.code.gson:gson:2.7'
+
+    compile 'com.facebook.android:facebook-android-sdk:4.13.2'
+    compile 'de.hdodenhof:circleimageview:2.0.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="150dp"
+    android:background="@color/green"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/header"/>
+    <com.littlezombie.shurover.widget.ProfilePictureView
+        android:id="@+id/navigationView_profilePictureView"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="32dp" />
+
+    <TextView
+        android:id="@+id/navigationView_hiTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/navigationView_profilePictureView"
+        android:layout_marginTop="8dp"
+        android:text="Welcome! xxx"
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>

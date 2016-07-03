@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1076821537142",
+    "firebase_url": "https://shurover-7cf58.firebaseio.com",
+    "project_id": "shurover-7cf58",
+    "storage_bucket": "shurover-7cf58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076821537142:android:395536f38ad0cfed",
+        "android_client_info": {
+          "package_name": "com.littlezombie.shurover"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076821537142-08a0ig22fmjpbuesti0ntnh9tn5k0284.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.littlezombie.shurover",
+            "certificate_hash": "9332A67FA64D3AC64712B3B7DC8B86BE750D49B5"
+          }
+        },
+        {
+          "client_id": "1076821537142-5bl85fbpao88l520sn763ijbch0492n1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAMm0pxcNryxsTmQL6Mo14QN0YKrAhF5E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076821537142-5bl85fbpao88l520sn763ijbch0492n1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
