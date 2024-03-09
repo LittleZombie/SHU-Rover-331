@@ -1,10 +1,9 @@
 <resources>
-    <string name="app_name_chinese_name">世新羅浮童軍團</string>
+    <string name="app_name_chinese_name">世新童軍團</string>
     <string name="app_name_english_name">SHU ROVER SCOUT</string>
-    <string name="toolbar_title">   世新羅浮童軍團－團康</string>
+    <string name="toolbar_title">世新童軍團－團康</string>
     <string name="scout_song">童軍音樂</string>
-    <string name="activity_song">團康歌曲</string>
-
+    <string name="group_song">團康歌曲</string>
 
     <!-- PART A SCOUT SONG -->
     <string-array name="scout_songs_chinese_name">
@@ -364,8 +363,8 @@
     </string-array>
 
 
-    <!-- PART B RECREATION SONG -->
-    <string-array name="recreation_songs_chinese_name">
+    <!-- PART B GROUP SONG -->
+    <string-array name="group_songs_chinese_name">
         <item value="0">向陽</item>
         <item value="1">歡迎歌</item>
         <item value="2">吃飯歌</item>
@@ -415,7 +414,7 @@
         <item value="46">長又寬</item>
     </string-array>
 
-    <string-array name="recreation_songs_english_name">
+    <string-array name="group_songs_english_name">
         <item value="0">b_to_the_sun_song</item>
         <item value="1">b_welcome_song</item>
         <item value="2">b_eating_song</item>
@@ -465,7 +464,7 @@
         <item value="46">b_long_and_width_song</item>
     </string-array>
 
-    <string-array name="recreation_songs_lyrics">
+    <string-array name="group_songs_lyrics">
 
         <item value="0">
             \n緩緩地升起來 看陽光多可愛

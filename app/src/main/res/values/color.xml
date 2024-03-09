@@ -3,7 +3,7 @@
 
     <color name="green">#ff6ab244</color>
     <color name="dark_green">#558B2F</color>
-
     <color name="start_background">#8fc03b</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>

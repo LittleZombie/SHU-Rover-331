@@ -1,0 +1,64 @@
+package com.littlezombie.shurover.viewmodel
+
+import android.media.MediaPlayer
+import androidx.lifecycle.ViewModel
+import java.io.IOException
+
+class SongViewModel : ViewModel() {
+
+    private var mediaPlayer: MediaPlayer? = null
+
+    fun setMediaPlayer(mediaPlayer: MediaPlayer) {
+        this.mediaPlayer = mediaPlayer
+    }
+
+    fun prepare() {
+        mediaPlayer?.prepare()
+        mediaPlayer?.seekTo(0)
+    }
+
+    fun startPlaying() {
+        mediaPlayer?.start()
+    }
+
+    fun pausePlaying() {
+        if (isRunning()) {
+            mediaPlayer?.pause()
+        }
+    }
+
+    fun stop() {
+        mediaPlayer?.stop()
+        try {
+            prepare()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+
+    fun isRunning(): Boolean {
+        return mediaPlayer?.isPlaying ?: false
+    }
+
+    fun getCurrentPosition(): Float {
+        return mediaPlayer?.currentPosition?.toFloat() ?: 0f
+    }
+
+    fun getDuration(): Int {
+        return mediaPlayer?.duration ?: 0
+    }
+
+    fun seekTo(currentPosition: Float) {
+        mediaPlayer?.seekTo(currentPosition.toInt())
+    }
+
+    fun release() {
+        mediaPlayer?.release()
+        mediaPlayer = null
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        mediaPlayer?.release()
+    }
+}
