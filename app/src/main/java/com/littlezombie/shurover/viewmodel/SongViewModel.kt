@@ -7,9 +7,19 @@ import java.io.IOException
 class SongViewModel : ViewModel() {
 
     private var mediaPlayer: MediaPlayer? = null
+    var songName: String? = null
+        private set
+    var lyrics: String? = null
+        private set
 
-    fun setMediaPlayer(mediaPlayer: MediaPlayer) {
+    fun setPlaySongData(
+        mediaPlayer: MediaPlayer,
+        songName: String,
+        lyrics: String
+    ) {
         this.mediaPlayer = mediaPlayer
+        this.songName = songName
+        this.lyrics = lyrics
     }
 
     fun prepare() {
@@ -55,6 +65,8 @@ class SongViewModel : ViewModel() {
     fun release() {
         mediaPlayer?.release()
         mediaPlayer = null
+        songName = null
+        lyrics = null
     }
 
     override fun onCleared() {

@@ -16,9 +16,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -29,13 +28,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import com.littlezombie.shurover.view.compose.home.HomeTopAppBar
 import com.littlezombie.shurover.view.ui.theme.Green
-import com.littlezombie.shurover.view.ui.theme.White
 import com.littlezombie.shurover.viewmodel.SongViewModel
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
@@ -45,36 +45,35 @@ import scoutsongs.littlezombie.com.scoutsongs.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PlaySongScreen(
-    navController: NavController,
-    songName: String,
-    lyrics: String,
-    songViewModel: SongViewModel,
+    viewModel: SongViewModel,
     onKeepScreenOn: () -> Unit,
     clearKeepScreenOn: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val duration = remember { songViewModel.getDuration() }
+    val duration = remember { viewModel.getDuration() }
     val scope = rememberCoroutineScope()
-    var currentPosition by remember { mutableStateOf(songViewModel.getCurrentPosition()) }
+    var currentPosition by remember { mutableStateOf(viewModel.getCurrentPosition()) }
+    val songName = viewModel.songName.orEmpty()
+    val lyrics = viewModel.lyrics.orEmpty()
 
     LaunchedEffect(key1 = currentPosition) {
-        currentPosition = songViewModel.getCurrentPosition()
+        currentPosition = viewModel.getCurrentPosition()
     }
 
     Scaffold(
-        topBar = { PlaySongTopAppBar(modifier, navController, songName) },
+        topBar = { HomeTopAppBar(modifier = modifier) },
         modifier = Modifier.fillMaxSize(),
         content = { innerPadding ->
             Box(
                 modifier = Modifier
                     .padding(innerPadding)
-                    .fillMaxSize(),
+                    .fillMaxSize()
             ) {
-                // 在此放置您的內容
                 Image(
                     painter = painterResource(id = R.drawable.mao2_back),
                     contentDescription = null,
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.FillBounds
                 )
                 Column(
                     modifier = modifier.fillMaxSize(),
@@ -91,10 +90,13 @@ fun PlaySongScreen(
                         value = currentPosition,
                         onValueChange = {
                             currentPosition = it
-                            songViewModel.seekTo(currentPosition)
+                            viewModel.seekTo(currentPosition)
                         },
                         valueRange = 0f..duration.toFloat(),
-                        steps = 100
+                        colors = SliderDefaults.colors(
+                            activeTrackColor = Green,
+                            inactiveTickColor = Color.White
+                        )
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Row(
@@ -106,10 +108,10 @@ fun PlaySongScreen(
                             modifier = Modifier.size(88.dp),
                             onClick = {
                                 onKeepScreenOn.invoke()
-                                songViewModel.startPlaying()
+                                viewModel.startPlaying()
                                 scope.launch {
-                                    while (songViewModel.isRunning()) {
-                                        currentPosition = songViewModel.getCurrentPosition()
+                                    while (viewModel.isRunning()) {
+                                        currentPosition = viewModel.getCurrentPosition()
                                         delay(1000)
                                     }
                                 }
@@ -124,7 +126,7 @@ fun PlaySongScreen(
                         IconButton(
                             modifier = Modifier.size(88.dp),
                             onClick = {
-                                songViewModel.pausePlaying()
+                                viewModel.pausePlaying()
                                 clearKeepScreenOn.invoke()
                             }
                         ) {
@@ -137,7 +139,7 @@ fun PlaySongScreen(
                         IconButton(
                             modifier = Modifier.size(88.dp),
                             onClick = {
-                                songViewModel.stop()
+                                viewModel.stop()
                                 currentPosition = 0f
                                 clearKeepScreenOn.invoke()
                             }
@@ -155,45 +157,8 @@ fun PlaySongScreen(
 
     DisposableEffect(Unit) {
         onDispose {
-            songViewModel.release()
+            viewModel.release()
             scope.cancel()
         }
     }
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun PlaySongTopAppBar(
-    modifier: Modifier = Modifier,
-    navController: NavController,
-    songName: String
-) {
-//    TopAppBar(
-//        modifier = Modifier.background(Dark_Green),
-//        title = {
-//            Text(text = songName)
-//        },
-//        navigationIcon = {
-//            IconButton(onClick = { navController.popBackStack() }) {
-//                Icon(Icons.Default.ArrowBack, contentDescription = "Back")
-//            }
-//        }
-//    )
-
-    TopAppBar(
-        modifier = modifier,
-        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = Green,
-            titleContentColor = White
-        ),
-        title = {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = songName,
-                    Modifier.padding(start = 8.dp)
-                )
-            }
-        }
-    )
 }

@@ -1,5 +1,7 @@
 package com.littlezombie.shurover.view.compose.group
 
+import android.content.Context
+import android.media.MediaPlayer
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -10,18 +12,20 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavController
 import com.littlezombie.shurover.view.compose.Screen
 import com.littlezombie.shurover.view.compose.item.SongItem
+import com.littlezombie.shurover.viewmodel.SongViewModel
 import scoutsongs.littlezombie.com.scoutsongs.R
 
 @Composable
 fun GroupSongScreen(
     modifier: Modifier = Modifier,
-    navController: NavController
+    navController: NavController,
+    viewModel: SongViewModel
 ) {
-    GroupSongScreen(navController)
+    GroupSongScreen(navController, viewModel)
 }
 
 @Composable
-fun GroupSongScreen(navController: NavController) {
+fun GroupSongScreen(navController: NavController, viewModel: SongViewModel) {
     val context = LocalContext.current
     val scoutSongs =
         remember { context.resources.getStringArray(R.array.group_songs_chinese_name).toList() }
@@ -34,9 +38,22 @@ fun GroupSongScreen(navController: NavController) {
             SongItem(
                 name = songName,
                 onSongClicked = {
-                    navController.navigate("${Screen.PlayMusic.route}/$songName/$fileName/$lyrics")
+                    onSongItemClicked(context, viewModel, songName, fileName, lyrics)
+                    navController.navigate(Screen.PlayMusic.route)
                 }
             )
         }
     }
+}
+
+fun onSongItemClicked(
+    context: Context,
+    viewModel: SongViewModel,
+    songName: String,
+    fileName: String,
+    lyrics: String
+) {
+    val resId = context.resources.getIdentifier(fileName, "raw", context.packageName)
+    val mediaPlayer = MediaPlayer.create(context, resId)
+    viewModel.setPlaySongData(mediaPlayer, songName, lyrics)
 }

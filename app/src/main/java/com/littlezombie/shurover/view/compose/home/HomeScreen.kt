@@ -37,6 +37,7 @@ import com.littlezombie.shurover.view.ui.theme.Dark_Green
 import com.littlezombie.shurover.view.ui.theme.Gray
 import com.littlezombie.shurover.view.ui.theme.Green
 import com.littlezombie.shurover.view.ui.theme.White
+import com.littlezombie.shurover.viewmodel.SongViewModel
 import kotlinx.coroutines.launch
 import scoutsongs.littlezombie.com.scoutsongs.R
 
@@ -50,25 +51,21 @@ enum class SongPage(@StringRes val titleResId: Int) {
 fun HomeScreen(
     modifier: Modifier = Modifier,
     pages: Array<SongPage> = SongPage.values(),
-    navController: NavController
+    navController: NavController,
+    viewModel: SongViewModel
 ) {
     val pagerState = rememberPagerState(pageCount = { pages.size })
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
-        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            HomeTopAppBar(
-                scrollBehavior = scrollBehavior,
-                modifier = modifier
-            )
-        }
+        modifier = modifier,
+        topBar = { HomeTopAppBar(modifier = modifier) }
     ) { contentPadding ->
         HomePagerScreen(
             modifier = Modifier.padding(top = contentPadding.calculateTopPadding()),
             pagerState = pagerState,
             pages = pages,
-            navController = navController
+            navController = navController,
+            viewModel = viewModel
         )
     }
 }
@@ -79,7 +76,8 @@ fun HomePagerScreen(
     modifier: Modifier = Modifier,
     pagerState: PagerState,
     pages: Array<SongPage>,
-    navController: NavController
+    navController: NavController,
+    viewModel: SongViewModel
 ) {
     Column(modifier) {
         val coroutineScope = rememberCoroutineScope()
@@ -120,11 +118,11 @@ fun HomePagerScreen(
         ) { index ->
             when (pages[index]) {
                 SongPage.SCOUT_SONG -> {
-                    ScoutSongScreen(modifier = modifier, navController)
+                    ScoutSongScreen(modifier = modifier, navController, viewModel)
                 }
 
                 SongPage.GROUP_SONG -> {
-                    GroupSongScreen(modifier = modifier, navController)
+                    GroupSongScreen(modifier = modifier, navController, viewModel)
                 }
             }
         }
@@ -134,10 +132,7 @@ fun HomePagerScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeTopAppBar(
-    scrollBehavior: TopAppBarScrollBehavior,
-    modifier: Modifier = Modifier
-) {
+fun HomeTopAppBar(modifier: Modifier = Modifier) {
     TopAppBar(
         modifier = modifier,
         colors = centerAlignedTopAppBarColors(
@@ -152,7 +147,6 @@ fun HomeTopAppBar(
                     Modifier.padding(start = 8.dp)
                 )
             }
-        },
-        scrollBehavior = scrollBehavior
+        }
     )
 }
